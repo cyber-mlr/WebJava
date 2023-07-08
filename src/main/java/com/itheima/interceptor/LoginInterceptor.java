@@ -26,6 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         log.info("请求的url为:" + url);
         if (url.contains("login")){
             log.info("git测试");
+            log.info("git测试2");
             log.info("登陆操作，放行");
             return true;
         }
