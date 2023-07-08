@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.ProductDao">
+
+    <select id="selectProducts" resultType="com.itheima.entity.Product">
+        select * from product
+        <where>
+            <if test="name != null">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="priceBegin != null and priceEnd != null">
+                and price between #{priceBegin} and #{priceEnd}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteProduct">
+        delete from product
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
+
